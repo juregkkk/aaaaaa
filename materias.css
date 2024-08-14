@@ -1,0 +1,48 @@
+.conteudo-materia {
+    border: 2px solid black;
+    height: 30vh;
+    width: 20vw;
+    border-radius: 30px;
+    padding: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    color: var(--text-color);
+    cursor: pointer;
+}
+.conteudo-materia img {
+    height: 70%;
+    width: 80%;
+}
+
+.conteudo-materia h1 {
+    text-align: center;
+
+}
+.conteudo-materia:hover {
+    transition: 0.3s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-10px);
+
+}
+#materias {
+    height: 90vh;
+    width: 100%;
+    display: none;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--background-color);
+    color: var(--text-color);
+
+}
+
+#materias a {
+    text-decoration: none;
+}
+
