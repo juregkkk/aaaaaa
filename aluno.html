@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bem-vindo aluno</title>
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script src="js\conversas.js"></script>
+    <link rel="stylesheet" href="css\conversas.css">
+    <link rel="stylesheet" href="css\materias.css">
+    <link rel="stylesheet" href="css/perfil.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --background-color: #ffffff;
+            --text-color: #000000;
+        }
+
+        body,
+        html {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--background-color);
+            font-family: poppins;
+        }
+
+        body.dark-mode section {
+            --background-color: #4e4d4d;
+            --text-color: #f1e9e9;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="file"] {
+            width: 30vw;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            outline: none;
+            border-bottom: solid black 3px;
+            background-color: transparent;
+        }
+
+
+
+
+        /* Adicionando estilos para a navbar */
+        .navbar {
+            width: 250px;
+            background-color: var(--background-color);
+            position: fixed;
+            top: 0;
+            left: -300px;
+            height: 100%;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+
+        .navbar.show {
+            left: 0;
+            /* Mostra a navbar */
+        }
+
+
+        .navbar a {
+            display: block;
+            color: var(--text-color);
+            padding: 10px 0;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            background-color: var(--text-color);
+            color: var(--background-color);
+            padding-left: 10px;
+            transition: 0.3s;
+        }
+
+        .menu-icon {
+            font-size: 30px;
+            cursor: pointer;
+            position: fixed;
+            top: 10px;
+            left: 2%;
+            z-index: 1000;
+        }
+
+        .imagem {
+            height: 45px;
+            width: 45px;
+            position: absolute;
+            top: 10px;
+            left: 76%;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #4e4d4d;
+            cursor: pointer;
+        }
+
+        section {
+            margin-left: 0;
+            /* Remove a margem para a navbar */
+            transition: margin-left 0.3s;
+        }
+
+        section.shifted {
+            margin-left: 270px;
+            /* Adiciona espaço para a navbar quando visível */
+        }
+
+
+
+
+        .button-theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            position: fixed;
+            top: 10px;
+            color: var(--text-color);
+            right: 10px;
+        }
+
+      
+        .foto {
+            display: none;
+        }
+
+        .timestamp {
+            font-size: 0.8em;
+            /* Tamanho menor */
+            color: gray;
+            /* Cor cinza */
+        }
+
+
+        #Atividades {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+
+        }
+
+        #perfil {
+            display: none;
+        }
+
+
+
+        @media (max-width: 768px) {
+            .text-area {
+                width: 90vw;
+                height: 40vh;
+            }
+
+            input[type="text"],
+            input[type="password"],
+            #text {
+                width: 80%;
+
+            }
+
+            #atividades img {
+                width: 70vw;
+                height: 70vh;
+            }
+
+            #materias {
+                grid-template-columns: repeat(1, auto);
+                grid-template-rows: repeat(8, 1fr);
+            }
+
+            #materias a {
+                text-decoration: none;
+            }
+
+            .conteudo-materia {
+                width: 60vw;
+                height: 40vh;
+            }
+
+        }
+
+        @media (max-width: 480px) {
+            .text-area {
+                width: 80vw;
+                height: 35vh;
+            }
+
+            input[type="text"],
+            input[type="password"],
+            #text {
+                width: 80%;
+            }
+
+            #materias {
+                grid-template-columns: repeat(1, auto);
+                grid-template-rows: repeat(8, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button class="button-theme-toggle" onclick="toggleTheme()">&#9788;</button> <!-- Sol -->
+
+    <div class="menu-icon" onclick="toggleNavbar()">&#9776;</div> <!-- Ícone de menu -->
+    <div class="navbar">
+        <h2 style="text-align: center;">Menu</h2>
+        <a href="#" id="materias-btn">Materias</a>
+        <a href="#" id="Atividades-btn">Atividades</a>
+        <a href="#" id="#">Cronogramas</a>
+        <a href="#" id="conversas-btn">Conversas</a>
+        <a href="#" id="perfil-btn">Perfil</a>
+        <img src="https://cdn.playbuzz.com/cdn/913253cd-5a02-4bf2-83e1-18ff2cc7340f/c56157d5-5d8e-4826-89f9-361412275c35.jpg"
+            alt="clique aqui para mudar de foto" class="imagem">
+        <input type="file" name="foto" class="foto">
+    </div>
+    <section>
+        <main class="main-content">
+            <div id="chat-form">
+                <div class="info-box">
+                    <p id="time-info">Carregando horário...</p>
+                </div>
+                <div class="text-area" id="text-area"></div>
+                <div class="input-wrapper">
+                    <input type="text" id="text" placeholder="Digite sua mensagem aqui">
+                    <span class="icon" onclick="triggerFileInput()">&#128206;</span>
+            
+                    <input type="file" id="file" onchange="handleFileUpload()">
+                </div>
+                <div>
+                    <input type="submit" value="Enviar" onclick="enviar()" id="enviar">
+                    <input type="reset" value="Redefinir" onclick="redefinir()">
+                </div>
+            </div>
+        </main>
+    </section>
+    <section id="materias">
+        <a href="materias.html\portugues.html">
+            <div class="conteudo-materia">
+                <img src="https://cdn-icons-png.flaticon.com/512/5520/5520958.png" alt="">
+                <h1>Portugues</h1>
+            </div>
+        </a>
+        <a href="materias.html\matematica.html">
+            <div class="conteudo-materia">
+                <img src="https://static.vecteezy.com/system/resources/previews/000/143/139/original/vector-mathematic-icons.jpg"
+                    alt="">
+                <h1>Matematica</h1>
+            </div>
+        </a>
+        <a href="materias.html\historia.html">
+            <div class="conteudo-materia">
+                <img src="https://cdn-icons-png.flaticon.com/512/4650/4650548.png" alt="">
+                <h1>Historia</h1>
+            </div>
+        </a>
+        <a href="materias.html\fisica.html">
+            <div class="conteudo-materia">
+                <img src="https://cdn-icons-png.flaticon.com/512/2219/2219150.png" alt="">
+                <h1>Fisica</h1>
+            </div>
+        </a>
+        <a href="materias.html\ingles.html">
+            <div class="conteudo-materia">
+                <img src="https://i.pinimg.com/originals/f0/bd/d4/f0bdd4701aa46b16e4b96dc73f8c01be.png" alt="">
+                <h1>Ingles</h1>
+            </div>
+        </a>
+        <a href="materias.html\geografia.html">
+            <div class="conteudo-materia">
+                <img src="https://i.pinimg.com/736x/17/27/64/172764a4a4e40324adb7b433aba03cc3.jpg" alt="">
+                <h1>Geografia</h1>
+            </div>
+        </a>
+        <a href="materias.html\biologia.html">
+            <div class="conteudo-materia">
+                <img src="https://cdn-icons-png.flaticon.com/512/2201/2201544.png" alt="">
+                <h1>Biologia</h1>
+            </div>
+        </a>
+        <a href="materias.html\quimica.html">
+            <div class="conteudo-materia">
+                <img src="https://static.vecteezy.com/system/resources/previews/002/863/737/non_2x/chemistry-laboratory-experiment-tool-icon-vector.jpg"
+                    alt="">
+                <h1>Quimica</h1>
+            </div>
+        </a>
+
+    </section>
+    <section id="Atividades">
+        <img src="img\undraw_Exams_re_4ios.png" alt="">
+        <span>sem Atividades no momento</span>
+    </section>
+    <section id="perfil">
+        <div class="settings-container">
+            <h2>Profile Settings</h2>
+
+            <div class="profile-picture">
+                <img src="profile-pic.jpg" alt="Profile Picture" class="image">
+                <input type="file" class="foto" accept="image/*">
+            </div>
+
+            <form>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" value="John Doe">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" value="john.doe@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input type="text" id="location" value="New York, USA">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Enter new password">
+                </div>
+
+                <div class="form-actions">
+                    <input type="submit" value="Save Changes">
+                    <input type="button" value="Cancel">
+                </div>
+            </form>
+        </div>
+    </section>
+   
+    <script>
+
+        let atividadesbtn = document.getElementById('Atividades-btn');
+        let mainContentElements = document.getElementsByClassName('main-content');
+        let conversasbtn = document.getElementById('conversas-btn');
+        let materiasbtn = document.getElementById('materias-btn')
+        let materias = document.getElementById('materias');
+        let atividades = document.getElementById('Atividades');
+        let perfilbtn = document.getElementById('perfil-btn');
+        let perfil = document.getElementById('perfil');
+
+        const image = document.getElementById('imagem');
+        const foto = document.getElementById('foto');
+
+        atividadesbtn.addEventListener("click", () => {
+            // Obter todos os elementos com a classe 'main-content'
+            for (let element of mainContentElements) {
+                element.style.display = 'none';
+            }
+
+            materias.style.display = 'none';
+            atividades.style.display = 'grid';
+            perfil.style.display = 'none';
+
+        });
+        perfilbtn.addEventListener("click", () => {
+            // Obter todos os elementos com a classe 'main-content'
+            for (let element of mainContentElements) {
+                element.style.display = 'none';
+            }
+
+            materias.style.display = 'none';
+            atividades.style.display = 'none';
+            perfil.style.display = 'grid';
+
+        });
+        conversasbtn.addEventListener("click", () => {
+            // Iterar sobre todos os elementos e definir display para 'none'
+            for (let element of mainContentElements) {
+                element.style.display = 'flex';
+            }
+            materias.style.display = 'none';
+            atividades.style.display = 'none';
+            perfil.style.display = 'none';
+            // Definir display para 'grid' no elemento com id 'materias'
+
+        });
+        materiasbtn.addEventListener("click", () => {
+            for (let element of mainContentElements) {
+                element.style.display = 'none';
+            }
+            materias.style.display = 'grid';
+            atividades.style.display = 'none';
+            perfil.style.display = 'none';
+
+        });
+
+        // Função para alterar a imagem quando o input de arquivo muda
+        foto.addEventListener("change", () => {
+            image.src = URL.createObjectURL(foto.files[0]);
+        });
+        image.addEventListener("click", () => {
+            foto.click();
+        })
+
+        let username = '';
+
+        // Função para alternar o tema (modo claro/escuro)
+        function toggleTheme() {
+            const body = document.body;
+            const button = document.querySelector('.button-theme-toggle');
+            body.classList.toggle('dark-mode');
+
+            if (body.classList.contains('dark-mode')) {
+                button.innerHTML = '&#9789;'; // Lua
+            } else {
+                button.innerHTML = '&#9788;'; // Sol
+            }
+        }
+
+        // Função para alternar a exibição da navbar
+        function toggleNavbar() {
+            const navbar = document.querySelector('.navbar');
+            const mainContent = document.querySelector('section');
+            navbar.classList.toggle('show');
+            mainContent.classList.toggle('shifted');
+        }   
+    </script>
+</body>
+
+</html>
