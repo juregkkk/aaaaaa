@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página do Professor</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+
+        }
+
+        body {
+            height: 100vh;
+            width: 100%;
+            display: grid;
+            justify-content: center;
+            align-items: center;
+            font-family: poppins;
+        }
+
+        main {
+            width: 50vw;
+            min-height: 50vh;
+            box-shadow: 10px 10px 20px black;
+            display: none;
+            padding: 10px;
+            align-items: center;
+            gap: 20px;
+        }
+
+        #upload-form {
+            display: none;
+            flex-direction: column;
+            gap: 20px;
+            padding: 10px;
+
+
+        }
+
+        #titulo {
+            border: none;
+            margin-bottom: 8px;
+            border-bottom: 4px solid black;
+            padding: 4px;
+            height: 3rem;
+            font-size: 2rem;
+            outline: none;
+            width: 100%;
+
+        }
+
+        #enviar {
+            width: 20%;
+            height: 2rem;
+            background-color: blue;
+            color: aliceblue;
+            border-radius: 8px;
+
+        }
+
+        #file-list {
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            max-height: 70px;
+            overflow-y: auto;
+            display: none;
+        }
+
+        #file-list li {
+            list-style-type: none;
+            padding: 5px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        #file-description {
+            border: none;
+            outline: none;
+            min-height: 50px;
+            width: 30%;
+            resize: none;
+            font-family: poppins;
+
+        }
+
+        #file-upload {
+            display: none;
+        }
+
+        .icon {
+            cursor: pointer;
+        }
+
+        .content {
+            height: 40vh;
+            width: 25vw;
+            border-radius: 10px;
+            border: 2px solid black;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            gap: 10px;
+            cursor: pointer;
+
+        }
+
+        .content:hover {
+            transform: scale(1.05);
+            transition: 0.5s;
+            margin: 8px;
+            transform: translateY(-10px);
+
+        }
+
+        .content img {
+            height: 60%;
+            width: 70%;
+        }
+
+        #home {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+
+
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        #lista-caixa {
+            display: none;
+        }
+
+        #voltar {
+            color: gray;
+            cursor: pointer;
+            top: 0px;
+            left: 0px;
+
+        }
+
+        #voltar:hover {
+            transition: 0.3s;
+            color: blue;
+
+
+        }
+
+        @media (max-width: 768px) {
+            body {
+                min-height: 20%;
+            }
+
+            #home {
+                display: flex;
+                flex-direction: column;
+
+            }
+
+            .content {
+                width: 80%;
+            }
+
+            #upload-form {
+                width: 90%;
+                height: 90%;
+            }
+
+            main {
+                width: 90%;
+                min-height: 50%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <section id="home">
+        <div class="content" id="diario-btn">
+            <img src="https://cdn-icons-png.flaticon.com/512/3238/3238016.png" alt="">
+            <h1>diario de bordo</h1>
+        </div>
+        <div class="content" id="atividade-btn">
+            <img src="https://i.pinimg.com/originals/64/d6/bb/64d6bb52c8d8445a13e94ad17c91c2ff.png" alt="">
+            <h1>enviar atividade </h1>
+
+        </div>
+        <div class="content" id="chamada-btn">
+            <img src="https://static.vecteezy.com/system/resources/previews/000/356/165/original/vector-checklist-icon.jpg"
+                alt="">
+            <h1> lista de chamada</h1>
+        </div>
+    </section>
+    <section id="lista-caixa">
+        <h1>Lista de Chamada</h1>
+        <table id="listaChamada">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Presença</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Os dados dos alunos serão inseridos aqui -->
+            </tbody>
+        </table>
+    </section>
+    <main id="atividade">
+        <span id="voltar">voltar</span>
+
+        <div id="upload-form">
+            <div style="display: flex;
+            justify-content: space-between;">
+                <h3>Enviar Atividade</h3>
+                <i class="fas fa-trash-alt" id="clearContentIcon" style="cursor: pointer;"></i>
+            </div>
+            <hr>
+            <input type="text" placeholder="titulo" id="titulo">
+            <div style="display: flex; justify-content: space-between;">
+                <textarea id="file-description" placeholder="Descrição "></textarea> <input type="file"
+                    id="file-upload">
+                <div id="file-list"></div>
+                <span class="icon" onclick="triggerFileInput()">&#128206;</span>
+
+            </div>
+            <div style="display: flex;justify-content: space-between;">
+                <div>
+                    <p>prazo para entrega</p>
+                    <input type="date" id="due-date">
+
+                </div>
+                <input type="submit" value="Enviar" onclick="uploadFile()" id="enviar">
+            </div>
+        </div>
+    </main>
+    <script>
+         document.addEventListener('DOMContentLoaded', () => {
+            const voltar = document.getElementById('voltar');
+            const contentDiv = document.querySelector('main');
+
+            voltar.addEventListener('click', () => {
+                contentDiv.style.display = 'none'
+                document.querySelector('section').style.display = 'flex'
+            });
+        });
+
+
+        document.getElementById('chamada-btn').addEventListener('click', () => {
+            document.getElementById('home').style.display = 'none';
+            document.getElementById('lista-caixa').style.display = 'grid';
+
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabela = document.querySelector('#listaChamada tbody');
+
+            fetch('C:listachamada.json')
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(aluno => {
+                        const row = document.createElement('tr');
+
+                        const nomeCell = document.createElement('td');
+                        nomeCell.textContent = aluno.nome;
+                        row.appendChild(nomeCell);
+
+                        const presencaCell = document.createElement('td');
+                        const presencaCheckbox = document.createElement('input');
+                        presencaCheckbox.type = 'checkbox';
+                        presencaCell.appendChild(presencaCheckbox);
+                        row.appendChild(presencaCell);
+
+                        tabela.appendChild(row);
+                    });
+                })
+                .catch(error => console.error('Erro ao buscar dados:', error));
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const clearContentIcon = document.getElementById('clearContentIcon');
+            const contentDiv = document.querySelector('main');
+
+            clearContentIcon.addEventListener('click', () => {
+                contentDiv.style.display = 'none'
+                alert('atividade apagado');
+                document.querySelector('section').style.display = 'flex'
+            });
+        });
+        document.getElementById('chamada-btn').addEventListener('click', () => {
+            document.getElementById('home').style.display = 'none';
+            document.getElementById('lista-caixa').style.display = 'grid'
+
+        })
+
+        document.getElementById('atividade-btn').addEventListener('click', () => {
+            document.getElementById('upload-form').style.display = 'flex';
+            document.querySelector('main').style.display = 'grid';
+            document.getElementById('home').style.display = 'none';
+            document.getElementById('lista-caixa').style.display = 'none'
+        })
+        const textarea = document.getElementById('file-description');
+        textarea.addEventListener('input', function () {
+            this.style.height = 'auto'; // Redefine a altura para auto para calcular a altura necessária
+            this.style.height = (this.scrollHeight) + 'px'; // Define a altura para o scrollHeight
+        });
+        function triggerFileInput() {
+            document.getElementById('file-upload').click();
+        }
+        document.getElementById('file-upload').addEventListener('change', function () {
+            const fileList = document.getElementById('file-list');
+            fileList.innerHTML = '';
+
+            for (let i = 0; i < this.files.length; i++) {
+                const li = document.createElement('li');
+                li.textContent = this.files[i].name;
+                fileList.appendChild(li);
+            }
+            fileList.style.display = 'grid'
+            textArea.appendChild(fileList);
+        });
+        function uploadFile() {
+            const fileInput = document.getElementById('file-upload');
+            const description = document.getElementById('file-description').value;
+            const dueDate = document.getElementById('due-date').value;
+
+            if (fileInput.files.length > 0 && description && dueDate) {
+                const file = fileInput.files[0];
+
+                // Lógica para upload do arquivo ao servidor
+                // Aqui você pode usar fetch ou XMLHttpRequest para enviar o arquivo ao backend
+
+                alert('Atividade enviada com sucesso!');
+            } else {
+                alert('Todos os campos são obrigatórios');
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cadastro</title>
+    <link rel="stylesheet" href="">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            justify-content: center;
+            align-items: center;
+            display: grid;
+            height: 100vh;
+            font-family: poppins;
+        }
+
+        main {
+            display: none;
+            justify-content: space-between;
+            height: 80vh;
+            min-width: 70vw;
+            border-radius: 8px;
+            box-shadow: 10px 10px 20px black;
+            padding: 7px;
+            align-items: center;
+        }
+
+        .left {
+            width: 50%;
+            height: 100%;
+            display: grid;
+            justify-content: center;
+            padding: 10px;
+            align-items: center;
+        }
+
+        img {
+            width: 90%;
+            height: 50vh;
+        }
+
+        .right {
+
+            gap: 20px;
+            padding: 10px;
+            width: 50%;
+            height: 100%;
+            align-items: center;
+            display: grid;
+
+        }
+
+        #entrar {
+            width: 10vw;
+            background-color: blue;
+            color: aliceblue;
+
+        }
+
+        #continuar {
+            border-radius: 0;
+            background-color: blue;
+            color: aliceblue;
+            height: 2rem;
+        }
+
+        .lt {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .caixa {
+            display: flex;
+            gap: 40px;
+        }
+        hr{
+            color: gray;
+            width: 45%;
+        }
+
+        input[type="submit"]:hover {
+            transform: translateY(-5px);
+            transition: 0.5s ease-in-out;
+            cursor: pointer;
+
+        }
+
+        #login-form {
+            width: 40vw;
+            min-height: 40vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding: 20px;
+            background-color: transparent;
+            border: solid 2px black;
+            border-radius: 8px;
+            font-family:poppins;
+
+        }
+
+        #login-form input[type="text"],
+        #login-form input[type="password"] {
+            width: 30vw;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            outline: none;
+            border-radius: 0px;
+            border-bottom: solid black 3px;
+            background-color: transparent;
+        }
+
+        #login-form input[type="submit"] {
+            width: 30vw;
+            background-color: blue;
+            color: aliceblue;
+            padding: 10px;
+            margin: 10px;
+        }
+
+        input {
+            border-radius: 30px;
+            padding: 4px;
+            margin-bottom: 20px;
+
+        }
+        .genro{
+            display: flex;
+            text-align: center;
+            gap: 10px;
+        }
+
+        #cadastrar-btn{
+            cursor: pointer;
+            background-color: transparent;
+            width: 30vw;
+            color: gray;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 4px;
+            width: 100;
+        }
+
+        #top {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                height: 100vh;
+                width: 100%;
+                align-items: center;
+                display: grid;
+                font-size: 1rem;
+            }
+
+            main {
+                width: 100vw;
+                height: 100%;
+                padding-right: 10px;
+    
+
+            }
+            .right{
+                width: 100%;
+            }
+
+            .caixa{
+                gap: 8px;
+                width: 100%;
+                justify-content: center;
+                flex-direction: column;
+            }
+            main input[type="submit"]{
+                width: 80vw;
+                height: 3rem;
+                border-radius: 20px;
+            }
+            #login-form button, #login-form input[type="submit"]
+           {
+                width: 80vw;
+            }
+            #login-form input[type="text"], #login-form input[type="password"]{
+                width: 70vw;
+            }
+
+            .left {
+                display: none;
+            }
+
+            #entrar {
+                width: 20vw;
+                margin-left: 20px;
+            }
+            #continuar{
+                width: 100%;
+                height: 3rem;
+                border-radius: 20px;
+                margin: 0px;
+            }
+
+            .genro {
+                display: flex;
+            }
+
+            .right div[style*="display: flex;"] {
+                flex-direction: column;
+            }
+            p{
+                display: flex;
+            }
+
+            input[type="submit"] {
+                margin-top: 20px;
+
+            }
+            #login-form{
+                width: 90vw;
+                height: 60vh;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="login-form">
+        <h2>Login</h2>
+        <input type="text" id="username" placeholder="Nome">
+        <input type="password" id="password" placeholder="Senha">
+        <input type="submit" value="Login" onclick="login()">
+        <div>
+            <div style="display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;"
+        >
+                <hr> ou
+                <hr>
+            </div>
+            <div style="display: flex;flex-direction: column;
+            justify-content: center;">
+            <button id="cadastrar-btn">Cadastrar</button>
+            <span>esqueceu a senha? <a href="">clique aqui </a></span>
+        </div>
+            
+        </div>
+    </div>
+        <main id='main-content'>
+            <div class="left">
+                <img src="C:\Users\55119\Downloads\undraw_undraw_undraw_undraw_sign_up_ln1s_-1-_s4bc_-1-_ee41_-1-_kf4d.svg"
+                    alt="">
+            </div>
+            <div class="right">
+                <div id="top">
+                    <h1>cadastrar</h1>
+                   <input type="submit" value="entrar" id="entrar" name="entrar">
+                </div>
+                <div class="caixa">
+                    <div class="lt">
+                        <span>nome</span>
+                        <input type="text" placeholder="Nome">
+                        <span>email</span>
+                        <input type="email" placeholder="email">
+                        <span>senha</span>
+                        <input type="password" placeholder="senha" id="senha">
+                    </div>
+                    <div class="lt">
+                        <span>turma</span>
+                        <input list="turmas" id="turma" name="turma">
+                        <datalist id="turmas">
+                            <option value="eletro">
+                            <option value="segurança do trabalho">
+                            <option value="eventos">
+                            <option value="administração"></option>
+                        </datalist>
+                        <span> numero</span>
+                        <input type="text" placeholder="(xx)xxxxx-xxxx" max="11">
+                        <span>confirme sua senha</span>
+                        <input type="password" placeholder="confirme sua senha " id="confirmasenha">
+                    </div> 
+                </div>
+                <p>Voce é</p>
+                <div class="genro">
+                    Aluno <input type="radio" name="role" value="Aluno"> 
+                    Professor <input type="radio" name="role" value="Professor">
+                    
+                </div>
+                <input type="submit" value="continuar" id="continuar" name="confirme" onclick="continuar()">
+            </div>
+        </main>
+        <script>
+             // Função para realizar o login
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email: username, senha: password })
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert(data);
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+            });
+        }
+
+        // Função para cadastrar novo usuário
+        function cadastrar() {
+            const nome = document.getElementById('cadastro-nome').value;
+            const email = document.getElementById('cadastro-email').value;
+            const senha = document.getElementById('cadastro-senha').value;
+            const confirmasenha = document.getElementById('cadastro-confirmasenha').value;
+            const turma = document.getElementById('cadastro-turma').value;
+            const numero = document.getElementById('cadastro-numero').value;
+            const role = document.querySelector('input[name="role"]:checked').value;
+
+            if (senha !== confirmasenha) {
+                alert('As senhas não conferem!');
+                return;
+            }
+
+            fetch('/cadastrar', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ nome, email, senha, turma, numero, role })
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert(data);
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+            });
+        }
+        
+ document.getElementById('cadastrar-btn').addEventListener('click', function() {
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('main-content').style.display = 'flex';
+        });
+        document.getElementById('entrar').addEventListener('click', function() {
+            document.getElementById('main-content').style.display = 'none';
+            document.getElementById('login-form').style.display = 'flex';
+        });
+        </script>
+
+
+</body>
+
+</html>
