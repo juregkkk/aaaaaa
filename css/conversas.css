@@ -1,0 +1,118 @@
+main {
+    min-height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    transition: background-color 0.3s, color 0.3s;
+
+}
+#chat-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.text-area {
+    width: 70vw;
+    height: 50vh;
+    border: solid 2px var(--text-color);
+    border-radius: 8px;
+    padding: 10px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    background-color: transparent;
+    box-shadow: 10px 10px 20px black;
+    border: solid 2px var(--text-color);
+    display: flex;
+    flex-direction: column;
+}
+
+.info-box {
+    position: relative;
+    top: 10px;
+    left: 10px;
+    background-color: var(--background-color);
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    color: var(--text-color);
+}
+
+.info-box p {
+    margin: 5px 0;
+}
+
+input[type="submit"],
+input[type="reset"] {
+    padding: 10px 20px;
+    margin-right: 10px;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+#enviar {
+    background-color: blue;
+    color: #ffffff;
+}
+main input[type="file"] {
+    display: none;
+}
+
+#text {
+    border-radius: 20px;
+    width: 30vw;
+    z-index: 5;
+
+}
+.input-wrapper {
+    position: relative;
+    width: 80vw;
+    max-width: 400px;
+}
+
+.input-wrapper .icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+input[type="submit"]:hover,
+input[type="reset"]:hover {
+    transform: translateY(-5px);
+    transition: 0.3s ease-in-out;
+}
+.left-align {
+    align-self: flex-start;
+    text-align: left;
+    background-color: #e1ffc7;
+    padding: 10px;
+    border-radius: 8px;
+    margin: 5px 0;
+  }
+  
+  .right-align {
+    align-self: flex-end;
+    text-align: right;
+    background-color: #c7e1ff;
+    padding: 10px;
+    border-radius: 8px;
+    margin: 5px 0;
+  }
+  .timestamp {
+    font-size: 0.8em;
+    /* Tamanho menor */
+    color: gray;
+    /* Cor cinza */
+}
+
+
+
+
