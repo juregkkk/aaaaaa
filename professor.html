@@ -7,6 +7,7 @@
     <title>Página do Professor</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css\diariodebordo.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
@@ -18,12 +19,15 @@
         }
 
         body {
-            height: 100vh;
+            min-height: 100vh;
             width: 100%;
             display: grid;
             justify-content: center;
             align-items: center;
             font-family: poppins;
+        }
+        section{
+            padding: 10px;
         }
 
         main {
@@ -45,7 +49,7 @@
 
         }
 
-        #titulo {
+        .titulo {
             border: none;
             margin-bottom: 8px;
             border-bottom: 4px solid black;
@@ -82,13 +86,16 @@
             border-bottom: 1px solid #ddd;
         }
 
-        #file-description {
+        .file-description {
             border: none;
             outline: none;
-            min-height: 50px;
-            width: 30%;
             resize: none;
             font-family: poppins;
+
+        }
+        #descriçao-atividade{
+            min-height: 50px;
+            width: 30%;
 
         }
 
@@ -137,33 +144,72 @@
 
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
+        
+h1 {
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 20px;
+}
 
-        th,
-        td {
-            padding: 10px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    table-layout: fixed; /* Permite que as colunas se ajustem */
+}
 
-        th {
-            background-color: #4CAF50;
-            color: white;
-        }
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    word-wrap: break-word; /* Quebra texto longo */
+}
 
-        tr:hover {
-            background-color: #f5f5f5;
-        }
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+@media (max-width: 600px) {
+    table, thead, tbody, th, td, tr {
+        display: block; /* Faz com que a tabela seja exibida como blocos */
+    }
+    
+    thead {
+        display: none; /* Esconde os cabeçalhos em telas pequenas */
+    }
+
+    tr {
+        margin-bottom: 10px;
+        border-bottom: 2px solid #ddd;
+    }
+
+    td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+    }
+
+    td::before {
+        content: attr(data-label); /* Exibe o nome do cabeçalho antes do conteúdo */
+        position: absolute;
+        left: 0;
+        width: 50%;
+        padding-left: 10px;
+        font-weight: bold;
+        text-align: left;
+    }
+}
 
         #lista-caixa {
             display: none;
         }
 
-        #voltar {
+        .voltar {
             color: gray;
             cursor: pointer;
             top: 0px;
@@ -171,12 +217,13 @@
 
         }
 
-        #voltar:hover {
+        .voltar:hover {
             transition: 0.3s;
             color: blue;
 
 
         }
+        
 
         @media (max-width: 768px) {
             body {
@@ -209,21 +256,22 @@
 <body>
     <section id="home">
         <div class="content" id="diario-btn">
-            <img src="https://cdn-icons-png.flaticon.com/512/3238/3238016.png" alt="">
+            <img src="img\diary.png" alt="">
             <h1>diario de bordo</h1>
         </div>
         <div class="content" id="atividade-btn">
-            <img src="https://i.pinimg.com/originals/64/d6/bb/64d6bb52c8d8445a13e94ad17c91c2ff.png" alt="">
+            <img src="img\score.png" alt="">
             <h1>enviar atividade </h1>
 
         </div>
         <div class="content" id="chamada-btn">
-            <img src="https://static.vecteezy.com/system/resources/previews/000/356/165/original/vector-checklist-icon.jpg"
+            <img src="img\to-do-list.png"
                 alt="">
             <h1> lista de chamada</h1>
         </div>
     </section>
     <section id="lista-caixa">
+        <span class="voltar">voltar</span>
         <h1>Lista de Chamada</h1>
         <table id="listaChamada">
             <thead>
@@ -238,18 +286,18 @@
         </table>
     </section>
     <main id="atividade">
-        <span id="voltar">voltar</span>
+        <span class="voltar">voltar</span>
 
         <div id="upload-form">
             <div style="display: flex;
             justify-content: space-between;">
                 <h3>Enviar Atividade</h3>
-                <i class="fas fa-trash-alt" id="clearContentIcon" style="cursor: pointer;"></i>
+                <i class="fas fa-trash-alt" id="lixeira" style="cursor: pointer;"></i>
             </div>
             <hr>
-            <input type="text" placeholder="titulo" id="titulo">
+            <input type="text" placeholder="titulo" class="titulo">
             <div style="display: flex; justify-content: space-between;">
-                <textarea id="file-description" placeholder="Descrição "></textarea> <input type="file"
+                <textarea class="file-description" placeholder="Descrição " id="descriçao-atividade"></textarea> <input type="file"
                     id="file-upload">
                 <div id="file-list"></div>
                 <span class="icon" onclick="triggerFileInput()">&#128206;</span>
@@ -265,28 +313,67 @@
             </div>
         </div>
     </main>
+    <section id="diario-content">
+        <span class="voltar">voltar</span>
+       
+        <div class="diary-header">
+            <input type="text" placeholder="titulo" class="titulo" id="titulo-diario">
+        </div>
+    
+        <div class="new-entry">
+            <textarea id="diary-entry" rows="5" placeholder="Escreva sua nova entrada aqui..." class="file-description"></textarea>
+            <button onclick="addEntry()">Adicionar Entrada</button>
+        </div>
+    
+        <ul class="entry-list" id="entry-list">
+            <!-- Entradas serão adicionadas aqui -->
+        </ul>
+    </div>
+    <script src="js\diariodebordo.js"></script>
+    </section>
     <script>
-         document.addEventListener('DOMContentLoaded', () => {
-            const voltar = document.getElementById('voltar');
-            const contentDiv = document.querySelector('main');
 
-            voltar.addEventListener('click', () => {
-                contentDiv.style.display = 'none'
-                document.querySelector('section').style.display = 'flex'
+           const voltar = document.querySelectorAll('.voltar');
+           const atividade= document.querySelector('main');
+           let home =  document.getElementById('home');
+           let listacaixa =  document.getElementById('lista-caixa')
+           let chamadabtn = document.getElementById('chamada-btn')
+           const lixeira = document.getElementById('lixeira');
+           const textarea = document.querySelectorAll('.file-description');
+           const fileInput = document.getElementById('file-upload');     
+           let uploudform = document.getElementById('upload-form')      
+           const fileList = document.getElementById('file-list');
+           let atividadebtn = document.getElementById('atividade-btn')
+           let diariobtn = document.getElementById('diario-btn');
+           let diariodebordo = document.getElementById('diario-content');
+
+         document.addEventListener('DOMContentLoaded', () => {
+           
+            voltar.forEach((element) => {
+                element.addEventListener('click', () => {
+            uploudform.style.display = 'none';
+            atividade.style.display = 'none';
+            home.style.display = 'none';
+            listacaixa.style.display = 'none'
+            home.style.display = 'flex';
+            diariodebordo.style.display = 'none'
             });
         });
-
-
-        document.getElementById('chamada-btn').addEventListener('click', () => {
-            document.getElementById('home').style.display = 'none';
-            document.getElementById('lista-caixa').style.display = 'grid';
+    });
+               diariobtn.addEventListener('click', () => {
+                diariodebordo.style.display =' grid'
+                home.style.display = 'none';
+               })
+        chamadabtn.addEventListener('click', () => {
+            home.style.display = 'none';
+           listacaixa.style.display = 'grid';
 
         });
 
         document.addEventListener('DOMContentLoaded', () => {
             const tabela = document.querySelector('#listaChamada tbody');
 
-            fetch('C:listachamada.json')
+            fetch('listachamada.json')
                 .then(response => response.json())
                 .then(data => {
                     data.forEach(aluno => {
@@ -294,12 +381,14 @@
 
                         const nomeCell = document.createElement('td');
                         nomeCell.textContent = aluno.nome;
+                        nomeCell.setAttribute('data-label', 'Nome'); // Adiciona o atributo data-label
                         row.appendChild(nomeCell);
 
                         const presencaCell = document.createElement('td');
                         const presencaCheckbox = document.createElement('input');
                         presencaCheckbox.type = 'checkbox';
                         presencaCell.appendChild(presencaCheckbox);
+                        presencaCell.setAttribute('data-label', 'Presença'); // Adiciona o atributo data-label
                         row.appendChild(presencaCell);
 
                         tabela.appendChild(row);
@@ -309,37 +398,32 @@
         });
 
         document.addEventListener('DOMContentLoaded', () => {
-            const clearContentIcon = document.getElementById('clearContentIcon');
-            const contentDiv = document.querySelector('main');
-
-            clearContentIcon.addEventListener('click', () => {
-                contentDiv.style.display = 'none'
+           
+            lixeira.addEventListener('click', () => {
+                atividade.style.display = 'none'
                 alert('atividade apagado');
                 document.querySelector('section').style.display = 'flex'
             });
         });
-        document.getElementById('chamada-btn').addEventListener('click', () => {
-            document.getElementById('home').style.display = 'none';
-            document.getElementById('lista-caixa').style.display = 'grid'
 
+       atividadebtn.addEventListener('click', () => {
+          uploudform.style.display = 'flex';
+            atividade.style.display = 'grid';
+            home.style.display = 'none';
+            listacaixa.style.display = 'none'
         })
-
-        document.getElementById('atividade-btn').addEventListener('click', () => {
-            document.getElementById('upload-form').style.display = 'flex';
-            document.querySelector('main').style.display = 'grid';
-            document.getElementById('home').style.display = 'none';
-            document.getElementById('lista-caixa').style.display = 'none'
-        })
-        const textarea = document.getElementById('file-description');
-        textarea.addEventListener('input', function () {
-            this.style.height = 'auto'; // Redefine a altura para auto para calcular a altura necessária
-            this.style.height = (this.scrollHeight) + 'px'; // Define a altura para o scrollHeight
-        });
+      
+        textarea.forEach((element) => {
+    element.addEventListener('input', function() {
+        this.style.height = 'auto'; // Redefine a altura para calcular a nova altura
+        this.style.height = this.scrollHeight + 'px'; // Define a altura com base no scrollHeight
+    });
+});
         function triggerFileInput() {
-            document.getElementById('file-upload').click();
+            fileInput .click();
         }
-        document.getElementById('file-upload').addEventListener('change', function () {
-            const fileList = document.getElementById('file-list');
+        fileInput.addEventListener('change', function () {
+           
             fileList.innerHTML = '';
 
             for (let i = 0; i < this.files.length; i++) {
@@ -350,22 +434,19 @@
             fileList.style.display = 'grid'
             textArea.appendChild(fileList);
         });
-        function uploadFile() {
-            const fileInput = document.getElementById('file-upload');
-            const description = document.getElementById('file-description').value;
+        function uploadFile() {         
+            const description = textarea.value;
             const dueDate = document.getElementById('due-date').value;
 
             if (fileInput.files.length > 0 && description && dueDate) {
                 const file = fileInput.files[0];
-
-                // Lógica para upload do arquivo ao servidor
-                // Aqui você pode usar fetch ou XMLHttpRequest para enviar o arquivo ao backend
 
                 alert('Atividade enviada com sucesso!');
             } else {
                 alert('Todos os campos são obrigatórios');
             }
         }
+       
     </script>
 </body>
 
